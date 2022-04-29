@@ -1,7 +1,7 @@
 package com.example.clima.ui.model
 
-class WeatherResponse(
-    val cood: Coordinates,
+data class WeatherResponse(
+    val coordinates: Coordinates,
     val weather: List<Weather>,
     val base: String,
     val main: Main,
@@ -15,9 +15,50 @@ class WeatherResponse(
     val name: String,
     val cod: Int
 ) {
-
-    override fun toString(): String {
-        return super.toString()
-    }
-
 }
+
+data class Coordinates(
+    val lon: Double,
+    val lat: Double
+) {
+}
+
+data class Weather(
+    val id: Long,
+    val main: String,
+    val description: String,
+    val icon: String
+) {
+}
+
+data class Main(
+    val temp: Double,
+    val feelsLike: Double,
+    val tempMin: Double,
+    val tempMax: Double,
+    val pressure: Int,
+    val humidity: Int
+) {
+}
+
+data class Wind(
+    val speed: Double,
+    val deg: Int
+) {
+}
+
+data class Clouds(
+    val all: Int
+) {
+}
+
+data class Sys(
+    val type: Int,
+    val id: Long,
+    val message: Double,
+    val country: String,
+    val sunrise: Long,
+    val sunset: Long
+) {
+}
+

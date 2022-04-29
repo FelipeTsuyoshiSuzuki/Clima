@@ -6,8 +6,8 @@ import retrofit2.Response
 
 class Repository {
 
-    suspend fun getClima(city: String): Response<WeatherResponse> {
-        return RetrofitInstance.api.getClima(city)
+    suspend fun getWeatherData(city: String): Response<WeatherResponse> {
+        return RetrofitInstance.api.getWeatherData(city)
     }
 
 }

@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clima.data.repository.Repository
 import com.example.clima.ui.model.WeatherResponse
-import com.example.clima.util.Constants.API_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import kotlin.math.absoluteValue
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -22,10 +22,11 @@ class MainViewModel @Inject constructor(
     val myWeatherResponse: LiveData<Response<WeatherResponse>> = _myWeatherResponse
 
 
-    fun getClima(city: String) {
+
+    fun getWeatherData(city: String) {
         viewModelScope.launch{
             try{
-                val response = repository.getClima(city)
+                val response = repository.getWeatherData(city)
                 _myWeatherResponse.value = response
                 Log.d("Sucesso", response.body().toString())
             }catch(e: Exception) {
