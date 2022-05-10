@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.example.clima.R
 import com.example.clima.databinding.FragmentHomeBinding
 import com.example.clima.ui.MainViewModel
-import com.example.clima.ui.model.WeatherResponse
+import com.example.clima.model.WeatherResponse
 
 
 class HomeFragment : Fragment() {
@@ -37,12 +38,12 @@ class HomeFragment : Fragment() {
             if(isValidResponse(response.body())) {
                 binding.cityNameText.text = response.body()?.name.toString()
                 binding.temperatureText.text = formatTextTemperature(response.body()?.main?.temp.toString(), "ºC")
+                binding.iconImage.setImageResource(setIcon(response.body()!!.weather[0].id))
+                binding.textDescription.text = response.body()!!.weather[0].description
                 binding.cityInputText.error = null
             } else {
-                binding.cityNameText.text = "CIDADE"
-                binding.temperatureText.text = "TEMPERATURA "
-                binding.cityInputText.error = "Cidade Inválida"
-                Toast.makeText(context, "Por favor insira uma cidade válida", Toast.LENGTH_LONG).show()
+                binding.cityInputText.error = "Cidade não foi encontrada"
+                Toast.makeText(context, "Por favor digite novamente", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -57,5 +58,23 @@ class HomeFragment : Fragment() {
     private fun isValidResponse(response: WeatherResponse?): Boolean {
         return response != null
     }
+
+    private fun setIcon(id: Int): Int {
+        return when(id) {
+            in 200..232 -> R.drawable.icon_tempestade
+            in 300..321 -> R.drawable.icon_chuva
+            in 500..504 -> R.drawable.icon_chuva
+            511 -> R.drawable.icon_neve
+            in 521..531 -> R.drawable.icon_chuva
+            in 600..622 -> R.drawable.icon_neve
+            in 701..781 -> R.drawable.icon_nublado
+            800 -> R.drawable.icon_dia_limpo
+            in 801..804 -> R.drawable.icon_dia_nuvem
+
+            else -> R.drawable.icon_erro
+        }
+
+    }
+
 
 }

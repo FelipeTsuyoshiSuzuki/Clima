@@ -6,12 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clima.data.repository.Repository
-import com.example.clima.ui.model.WeatherResponse
+import com.example.clima.model.WeatherResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.util.*
 import javax.inject.Inject
-import kotlin.math.absoluteValue
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -20,8 +21,6 @@ class MainViewModel @Inject constructor(
 
     private var _myWeatherResponse = MutableLiveData<Response<WeatherResponse>>()
     val myWeatherResponse: LiveData<Response<WeatherResponse>> = _myWeatherResponse
-
-
 
     fun getWeatherData(city: String) {
         viewModelScope.launch{
