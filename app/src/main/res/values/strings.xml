@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Clima</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="velocidade_vento">Ventos De</string>
+    <string name="Humidade">Humidade Do Ar</string>
+
 </resources>

@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         binding.buttonSearch.setOnClickListener {
             val city = binding.cityInputText.text.toString()
             mainViewModel.getWeatherData(city)
-
+            binding.cityInputText.text = null
         }
 
         mainViewModel.myWeatherResponse.observe(viewLifecycleOwner) { response ->
@@ -37,10 +37,12 @@ class HomeFragment : Fragment() {
 
             if(isValidResponse(response.body())) {
                 binding.cityNameText.text = response.body()?.name.toString()
-                binding.temperatureText.text = formatTextTemperature(response.body()?.main?.temp.toString(), "ºC")
+                binding.temperatureText.text = formatText(response.body()?.main?.temp.toString(), "ºC")
                 binding.iconImage.setImageResource(setIcon(response.body()!!.weather[0].id))
                 binding.textDescription.text = response.body()!!.weather[0].description
                 binding.cityInputText.error = null
+                binding.ventoText.text = formatText(response.body()?.wind?.speed.toString(), "m/s")
+                binding.humidadeText.text = formatText(response.body()?.main?.humidity.toString(), "%")
             } else {
                 binding.cityInputText.error = "Cidade não foi encontrada"
                 Toast.makeText(context, "Por favor digite novamente", Toast.LENGTH_SHORT).show()
@@ -51,7 +53,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun formatTextTemperature(text: String, addText: String): String {
+    private fun formatText(text: String, addText: String): String {
         return "$text $addText"
     }
 
