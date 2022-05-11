@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
                 binding.ventoText.text = formatText(response.body()?.wind?.speed.toString(), "m/s")
                 binding.humidadeText.text = formatText(response.body()?.main?.humidity.toString(), "%")
             } else {
+                binding.iconImage.setImageResource(setIcon(0))
                 binding.cityInputText.error = "Cidade não foi encontrada"
                 Toast.makeText(context, "Por favor digite novamente", Toast.LENGTH_SHORT).show()
             }
