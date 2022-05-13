@@ -10,3 +10,5 @@ Ele tem como objetivo mostrar as condições climáticas do local que o usuário
  - Foi utilizado o Retrofit para se comunicar com a API OpenWeatherMap para conseguir os dados de clima.
  - MVVM.
  - Material Design.
+
+As imagens para os icones utilizados foram retirados do site https://icons8.com.br/
